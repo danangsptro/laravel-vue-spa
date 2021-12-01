@@ -24,4 +24,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['prefix' => 'backend'], function(){
     Route::get('/', [FormController::class, 'index'])->name('form.index');
     Route::post('/post', [FormController::class, 'store'])->name('form.store');
+    Route::put('/update/{id}', [FormController::class, 'update'])->name('form.update');
+    Route::delete('/delete/{id}', [FormController::class, 'destroy'])->name('form.destroy');
 });
