@@ -1,24 +1,16 @@
 <template>
     <div>
-        <b-navbar toggleable="lg" type="dark" variant="info">
-            <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
-            <b-collapse id="nav-collapse" is-nav>
-                <b-navbar-nav>
-                      <router-link to="/" tag="b-nav-item">
-                        Home
-                    </router-link>
-                    <router-link to="/form" tag="b-nav-item">
-                        Wkwat
-                    </router-link>
-                </b-navbar-nav>
-            </b-collapse>
-        </b-navbar>
+        <marquee><i>Selamat Datang di halaman form pendaftaran</i></marquee>
     </div>
 </template>
 
-<script>
-export default {
-    name: "Navbar",
-};
-</script>
+<style scoped>
+marquee {
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px;
+    background-color: #09379b;
+    border-radius: 10px;
+}
+</style>

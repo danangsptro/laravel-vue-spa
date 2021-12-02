@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-button @click="$bvModal.show('modal-scoped')">Open Modal</b-button>
+        <b-button @click="$bvModal.show('modal-scoped')">Create</b-button>
         <div
             class="d-flex justify-content-center spinner-borderD"
             v-if="popupActivo"

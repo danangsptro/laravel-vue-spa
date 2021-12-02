@@ -2,14 +2,18 @@
     <div>
         <navbar />
         <div class="container">
-            <h1>Form</h1>
+            <p class="text-form">Form input pendaftaran</p>
+            <hr />
             <div
                 class="d-flex justify-content-center spinner-borderD"
                 v-if="popupActivo"
             >
                 <div class="spinner-border text-warning" role="status"></div>
             </div>
-            <create-form @addItem="addItem"> </create-form>
+            <div class="display">
+                <create-form @addItem="addItem"> </create-form> &nbsp;
+                <button class="btn btn-success"><router-link to='/'><b-icon icon="caret-left-square-fill" style="width: 50px; color:wheat"></b-icon></router-link></button>
+            </div>
 
             <!-- Add Edit -->
             <div class="row mb-4">
@@ -51,7 +55,6 @@
                 </div>
             </div>
             <!-- Close Edit -->
-
 
             <table class="table table-bordered">
                 <thead>
@@ -129,7 +132,11 @@ export default {
     methods: {
         async getData() {
             try {
+                this.popupActivo = true;
                 let data = await axios.get("/api/backend");
+                setTimeout(() => {
+                    this.popupActivo = false;
+                }, 5000);
                 let result = data.data;
                 if (result.status == "success") {
                     this.posts = result.data;
@@ -223,5 +230,16 @@ export default {
 }
 .spinner-border {
     margin-top: 20%;
+}
+
+.text-form {
+    text-align: center;
+    font-weight: bold;
+    font-size: 25px;
+    padding: 1rem;
+}
+.display{
+    display: flex;
+    justify-content: center;
 }
 </style>
