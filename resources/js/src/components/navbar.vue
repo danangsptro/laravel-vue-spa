@@ -9,7 +9,7 @@ marquee {
     color: #fff;
     font-size: 20px;
     font-weight: bold;
-    padding: 10px;
+    padding: 20px;
     background-color: #09379b;
     border-radius: 10px;
 }
