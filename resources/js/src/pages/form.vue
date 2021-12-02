@@ -7,10 +7,52 @@
                 class="d-flex justify-content-center spinner-borderD"
                 v-if="popupActivo"
             >
-                <div class="spinner-border text-warning" role="status">
-                </div>
+                <div class="spinner-border text-warning" role="status"></div>
             </div>
             <create-form @addItem="addItem"> </create-form>
+
+            <!-- Add Edit -->
+            <div class="row mb-4">
+                <div class="col-lg-4" v-if="stateEdit === 'edit'">
+                    <label for="exampleInputEmail1">Name</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        v-model="put.name"
+                    />
+                    <label for="exampleInputEmail1">Umur</label>
+                    <input
+                        type="number"
+                        class="form-control"
+                        v-model="put.umur"
+                    />
+                    <label for="exampleInputEmail1">Alamat</label>
+                    <input
+                        type="text"
+                        class="form-control mb-3"
+                        v-model="put.alamat"
+                    />
+                    <label for="exampleInputEmail1">Pekerjaan</label>
+                    <input
+                        type="text"
+                        class="form-control mb-3"
+                        v-model="put.pekerjaan"
+                    />
+                    <button class="btn btn-success" @click="updateData()">
+                        Save
+                    </button>
+                    <button
+                        class="btn btn-danger"
+                        v-if="stateEdit === 'edit'"
+                        @click="changeEdit('defaultEdit')"
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </div>
+            <!-- Close Edit -->
+
+
             <table class="table table-bordered">
                 <thead>
                     <tr class="bg-color">
@@ -33,6 +75,8 @@
                             <button
                                 type="button"
                                 class="btn btn-secondary mb-3"
+                                @click="onEdit(d, index)"
+                                v-if="stateEdit === 'defaultEdit'"
                             >
                                 Edit
                             </button>
@@ -66,6 +110,15 @@ export default {
         return {
             posts: [],
             popupActivo: false,
+            stateEdit: "defaultEdit",
+            put: {
+                name: "",
+                umur: "",
+                alamat: "",
+                pekerjaan: "",
+            },
+            idEdit: null,
+            indexEdit: null,
         };
     },
 
@@ -103,6 +156,46 @@ export default {
 
         addItem(params) {
             this.posts.push(params);
+        },
+        onEdit(item, index) {
+            this.put.name = item.name;
+            this.put.umur = item.umur;
+            this.put.alamat = item.alamat;
+            this.put.pekerjaan = item.pekerjaan;
+            this.idEdit = item.id;
+            this.indexEdit = index;
+            this.stateEdit = "edit";
+        },
+
+        async updateData() {
+            try {
+                this.popupActivo = true;
+                await axios
+                    .put(`api/backend/update/${this.idEdit}`, {
+                        name: this.put.name,
+                        umur: this.put.umur,
+                        alamat: this.put.alamat,
+                        pekerjaan: this.put.pekerjaan,
+                    })
+                    .then((response) => {
+                        const data = response.data.data;
+                        this.posts[this.indexEdit].name = data.name;
+                        this.posts[this.indexEdit].umur = data.umur;
+                        this.posts[this.indexEdit].alamat = data.alamat;
+                        this.posts[this.indexEdit].pekerjaan = data.pekerjaan;
+                        setTimeout(() => {
+                            this.popupActivo = false;
+                        }, 5000);
+                        this.idEdit = null;
+                        this.indexEdit = null;
+                        this.stateEdit = "defaultEdit";
+                    });
+            } catch (error) {
+                throw error;
+            }
+        },
+        changeEdit(newEdit) {
+            this.stateEdit = newEdit;
         },
     },
 };
