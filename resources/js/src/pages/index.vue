@@ -1,19 +1,21 @@
 <template>
     <div>
         <navbar />
-        <div class="row container mt-4 justify-content-center">
-            <div class="col-lg-6" style="text-align-left">
-                <img :src="test" width="90%" />
-            </div>
-            <div class="col-lg-6 card">
-                <div class="card-text">
-                    <img :src="imgForm" width="30%" /><br /><br />
-                    <p>Silahkan klik di bawah ini !</p>
-                    <button class="btn btn-dark">
-                        <router-link to="/form" class="text-decoration">
-                            Klik disini
-                        </router-link>
-                    </button>
+        <div class="container">
+            <div class="row mt-4 justify-content-center">
+                <div class="col-lg-6" style="text-align-left">
+                    <img :src="test" width="90%" />
+                </div>
+                <div class="col-lg-6 card">
+                    <div class="card-text">
+                        <img :src="imgForm" width="30%" /><br /><br />
+                        <p>Silahkan klik di bawah ini !</p>
+                        <button class="btn btn-dark">
+                            <router-link to="/form" class="text-decoration">
+                                Klik disini
+                            </router-link>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

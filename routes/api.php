@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\FormController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,3 +28,5 @@ Route::group(['prefix' => 'backend'], function(){
     Route::put('/update/{id}', [FormController::class, 'update'])->name('form.update');
     Route::delete('/delete/{id}', [FormController::class, 'destroy'])->name('form.destroy');
 });
+
+Route::post('login', [AuthController::class, 'login'])->name('form.login');
