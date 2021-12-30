@@ -75,6 +75,7 @@ class AuthController extends Controller
         $respon = [
             'status' => 'success',
             'msg' => 'Logout successfully',
+            "status_code" => 200,
             'errors' => null,
             'content' => null,
         ];

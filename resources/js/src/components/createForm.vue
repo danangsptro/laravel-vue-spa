@@ -5,8 +5,7 @@
             class="d-flex justify-content-center spinner-borderD"
             v-if="popupActivo"
         >
-            <div class="spinner-border text-warning" role="status">
-            </div>
+            <div class="spinner-border text-warning" role="status"></div>
         </div>
         <b-modal id="modal-scoped" ref="closeModal">
             <template #modal-header="{ close }">
@@ -59,7 +58,13 @@ export default {
         return {
             posts: [],
             popupActivo: false,
+            token: localStorage.getItem("_token"),
         };
+    },
+    created() {
+        if (!this.token) {
+            this.$router.push({ name: "login" });
+        }
     },
     methods: {
         async saveCreate() {

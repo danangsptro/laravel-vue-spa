@@ -18,7 +18,6 @@ class userSeeder extends Seeder
             'email' => 'danang@gmail.com',
             'name' => 'Danang',
             'password' => \Hash::make('123456'),
-            'status' => 'aktif',
         ]);
     }
 }

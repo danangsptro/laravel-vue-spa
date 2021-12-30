@@ -12,7 +12,7 @@
             </div>
             <div class="display">
                 <create-form @addItem="addItem"> </create-form> &nbsp;
-                <button class="btn btn-success"><router-link to='/'><b-icon icon="caret-left-square-fill" style="width: 50px; color:wheat"></b-icon></router-link></button>
+                <button class="btn btn-success"><router-link to='/home'><b-icon icon="caret-left-square-fill" style="width: 50px; color:wheat"></b-icon></router-link></button>
             </div>
 
             <!-- Add Edit -->
@@ -122,11 +122,15 @@ export default {
             },
             idEdit: null,
             indexEdit: null,
+            token: localStorage.getItem("_token"),
         };
     },
 
     created() {
         this.getData();
+           if (!this.token) {
+            this.$router.push({ name: "login" });
+        }
     },
 
     methods: {
